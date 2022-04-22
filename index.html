@@ -11,20 +11,30 @@
     <title>Hello, world!</title>
   </head>
   <body>
-    <h1>Hello, world!</h1>
+    <div class="row justify-content-center">
+        <div class="col-8">
+            <h1>Zápis odpracovaných hodin</h1>
+
+            <form target="_blank" action="https://hook.eu1.make.com/j93ll3zxaiqt5ws7nea5cxbzxesiomun" method="POST">
+                <div class="mb-3">
+                    <label for="exampleInputEmail1" class="form-label">Číslo Pracovníka</label>
+                    <input type="text" name="worker-number" placeholder="" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                    <div id="emailHelp" class="form-text">Tady bude helptext, ahoj.</div>
+                  </div>
+                  <div class="mb-3">
+                    <label for="exampleInputEmail1" class="form-label">Činnost</label>
+                    <input type="text" name="work-type" placeholder="" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                  </div>
+                  <div class="mb-3">
+                    <label for="exampleInputEmail1" class="form-label">Počet hodin</label>
+                    <input type="text" name="work-hours" placeholder="" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                  </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+              </form>
+        </div>
+      </div>
     
-    <form action="https://hook.eu1.make.com/j93ll3zxaiqt5ws7nea5cxbzxesiomun" method="POST">
-        <div class="mb-3">
-          <label for="exampleInputEmail1" class="form-label">Email address</label>
-          <input type="text" name="Email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-          <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
-        </div>
-        <div class="mb-3">
-          <label for="exampleInputPassword1" class="form-label">Sappword</label>
-          <input type="password" name="password" class="form-control" id="exampleInputPassword1">
-        </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
-      </form>
+    
     <!-- Optional JavaScript; choose one of the two! -->
 
     <!-- Option 1: Bootstrap Bundle with Popper -->
