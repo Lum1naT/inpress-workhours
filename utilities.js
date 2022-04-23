@@ -55,3 +55,34 @@ function msToTime(s) {
         return false;
       }
   }
+
+
+  function calculateTimeSpent(){
+    let start_date = $("#start-date").val();
+    let start_time = $("#start-time").val();
+
+    let end_date = $("#end-date").val();
+    let end_time = $("#end-time").val();
+    if (end_time === "" || start_time === ""){
+        console.log("no time");
+        return "";
+    }
+    if (end_date === "" || start_date === ""){
+        console.log("no date");
+        return "";
+    }
+    let start_mili = new Date(start_date + " " + start_time).getTime()
+    let end_mili = new Date(end_date + " " + end_time).getTime()
+    console.log(start_mili)
+    console.log(end_mili)
+    console.log(start_mili >= end_mili)
+    if(start_mili >= end_mili){
+        document.getElementById("time-calculation").innerHTML="<p> Datum musí být v budoucnosti </p>";
+        return "";
+    } else {
+        difference = msToTime(end_mili - start_mili);
+        console.log("diff: " + difference);
+        document.getElementById("time-calculation").innerHTML="<p>"+difference+"</p>";
+    }
+}
+

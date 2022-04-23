@@ -12,13 +12,13 @@
     <title>Hello, world!</title>
   </head>
   <body>
-    <div class="row justify-content-center">
+    <div class="row justify-content-around">
 
-        <div class="col-8">
+        <div class="col-md-6">
             <h1>Zápis odpracovaných hodin</h1>
             <a target="_blank" href="https://docs.google.com/spreadsheets/d/1a6EElxcMa7kGsiWU8oYtK94IwWV8FHhq_rBHt9Zl2o8/edit?usp=sharing">Tady testovací excel</a>
 
-            <form target="_blank" action="https://hook.eu1.make.com/j93ll3zxaiqt5ws7nea5cxbzxesiomun" method="POST" id="form" class="row" onsubmit="return validateForm()">
+            <form target="_blank" action="https://hook.eu1.make.com/j93ll3zxaiqt5ws7nea5cxbzxesiomun" method="POST" id="form" class="row">
                 <div class="mb-3 col-12">
                     <label for="date" class="form-label">Datum</label>
                     <input type="date" name="date" placeholder="" class="form-control" id="date" aria-describedby="emailHelp" required>
@@ -53,7 +53,8 @@
                   </div>
                   <div class="col-md-12">
                     <div id="time-calculation"><p>Odpracováno: </p></div>
-            </div>
+                    <input hidden name="time-spent">
+                </div>
                   <div class="mb-3 col-12">
                     <label for="order-number" class="form-label">Číslo zakázky</label>
                     <input type="text" name="order-number" placeholder="" class="form-control" id="order-number" aria-describedby="order-number" required>
@@ -92,6 +93,14 @@
                 <button type="submit" class="btn btn-primary" id="butt" onclick="writeToFile()">Odeslat</button>
               </form>
         </div>
+
+        <div class="col-md-4">
+            <h3>Výpis již odeslaných formulářů: </h3>
+            <ul id="log">
+
+            </ul>
+          
+        </div>
       </div>
       <script src="workers.js"></script>
       <script src="machines.js"></script>
@@ -112,35 +121,44 @@
 
     });
 
-    function calculateTimeSpent(){
-        let start_date = $("#start-date").val();
-        let start_time = $("#start-time").val();
+    function addToLog(data, form){
+        var status = false;
+        if(data === "Accepted"){
+            console.log("ok");
+            var status = true;
+        }
 
-        let end_date = $("#end-date").val();
-        let end_time = $("#end-time").val();
-        if (end_time === "" || start_time === ""){
-            console.log("no time");
-            return "";
-        }
-        if (end_date === "" || start_date === ""){
-            console.log("no date");
-            return "";
-        }
-        let start_mili = new Date(start_date + " " + start_time).getTime()
-        let end_mili = new Date(end_date + " " + end_time).getTime()
-        console.log(start_mili)
-        console.log(end_mili)
-        console.log(start_mili >= end_mili)
-        if(start_mili >= end_mili){
-            document.getElementById("time-calculation").innerHTML="<p> Datum musí být v budoucnosti </p>";
-            return "";
-        } else {
-            difference = msToTime(end_mili - start_mili);
-            console.log("diff: " + difference);
-            document.getElementById("time-calculation").innerHTML="<p>"+difference+"</p>";
-        }
+        var order_number = $("#order-number").val();
+        var worker = $("#worker").val();
+        var operation = $("#work-type").val();
+        var machine = $("#work-machine").val();
+
+        document.getElementById("log").innerHTML += `<li>${order_number} - ${worker} - ${operation}, ${machine}</li>`  
+
 
     }
+
+    $("#form").submit(function(e) {
+
+        e.preventDefault(); // avoid to execute the actual submit of the form.
+    
+        var form = $(this);
+        var actionUrl = "https://hook.eu1.make.com/j93ll3zxaiqt5ws7nea5cxbzxesiomun";
+        
+        $.ajax({
+            type: "POST",
+            url: actionUrl,
+            data: form.serialize(), // serializes the form's elements.
+            success: function(data)
+            {
+              addToLog(data, form);
+            }
+        });
+        
+    });
+    
+
+    
 
 
     </script>
