@@ -1,0 +1,7 @@
+const operations = new Set()
+operations.add({"value": "opreace 1"})
+operations.add({"value": "opreace 2"})
+operations.add({"value": "opreace 3"})
+operations.add({"value": "opreace 4"})
+operations.add({"value": "opreace 5"})
+operations.add({"value": "opreace 6"})

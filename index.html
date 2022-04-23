@@ -58,35 +58,58 @@
                     <label for="worker" class="form-label">Pracovník</label>
                     <input type="text" name="worker-number" placeholder="" class="form-control" id="worker" aria-describedby="emailHelp">
                   </div>
-                  <div class="mb-3 col-12">
+                  <div class="mb-3 col-sm-6">
                     <label for="work-type" class="form-label">Operace</label>
-                    <input type="text" name="worker-number" placeholder="" class="form-control" id="work-type" aria-describedby="emailHelp">
-                  </div>
-                  <div class="mb-3 col-12">
+                    <input type="text" name="work-type" class="form-control" id="work-type" aria-describedby="work-type" list="operations">
+                    <datalist id="operations">
+
+                      </datalist>
+
+                                  </div>
+                  <div class="mb-3 col-sm-6">
                     <label for="work-machine" class="form-label">Stroj</label>
                     <select class="form-select" id="work-machine" aria-label="Stroje">
 
-                       
                       </select>
+                  </div>
+                  <div class="mb-3 col-sm-3">
+                    <label for="order-number" class="form-label">Počet kusů</label>
+                    <input type="number" name="worker-number" placeholder="" class="form-control" id="order-number" aria-describedby="emailHelp">
+                    <div id="dateHelp" class="form-text">helptext</div>
+                  </div>
+                  <div class="mb-3 col-sm-9">
+                    <label for="order-number" class="form-label">Poznámka</label>
+                    <input type="textarea" name="worker-number" placeholder="" class="form-control" id="order-number" aria-describedby="emailHelp">
+                    <div id="dateHelp" class="form-text">helptext</div>
                   </div>
                 <button type="submit" class="btn btn-primary" id="butt" onclick="writeToFile()">Submit</button>
               </form>
         </div>
       </div>
 
+      <script src="utilities.js"></script>
       <script src="machines.js"></script>
+      <script src="operations.js"></script>
       <script>
 
+
     $( document ).ready(function() {
+        $("#date").val(new Date().toDateInputValue())
+        $("#start-date").val(new Date().toDateInputValue())
+        $("#end-date").val(new Date().toDateInputValue())
         console.log( "ready!" );
-        console.log( machines );
-        $.each(machines, function (i, item) {
-            console.log("hi");
-            $('#work-machine').append($('<option>', { 
-                value: item.value.value,
-                text : item.value.text, 
-            }));
-        });
+        console.log( operations );
+
+        machines.forEach(element => {
+             $("#work-machine").append(`<option value="${element.value}">${element.text}</option>`)
+          });
+
+
+          operations.forEach(element => {
+            console.log(element.value);
+            $("#operations").append(`<option value="${element.value}">`)
+
+          });
     });
 
     var btn = document.getElementById('butt');
