@@ -53,7 +53,7 @@
                   </div>
                   <div class="col-md-12">
                     <div id="time-calculation"><p>Odpracováno: </p></div>
-                    <input hidden name="time-spent">
+                    <input type="text" hidden name="time-spent" id="time-spent">
                 </div>
                   <div class="mb-3 col-12">
                     <label for="order-number" class="form-label">Číslo zakázky</label>
@@ -121,41 +121,6 @@
 
     });
 
-    function addToLog(data, form){
-        var status = false;
-        if(data === "Accepted"){
-            console.log("ok");
-            var status = true;
-        }
-
-        var order_number = $("#order-number").val();
-        var worker = $("#worker").val();
-        var operation = $("#work-type").val();
-        var machine = $("#work-machine").val();
-
-        document.getElementById("log").innerHTML += `<li>${order_number} - ${worker} - ${operation}, ${machine}</li>`  
-
-
-    }
-
-    $("#form").submit(function(e) {
-
-        e.preventDefault(); // avoid to execute the actual submit of the form.
-    
-        var form = $(this);
-        var actionUrl = "https://hook.eu1.make.com/j93ll3zxaiqt5ws7nea5cxbzxesiomun";
-        
-        $.ajax({
-            type: "POST",
-            url: actionUrl,
-            data: form.serialize(), // serializes the form's elements.
-            success: function(data)
-            {
-              addToLog(data, form);
-            }
-        });
-        
-    });
     
 
     
