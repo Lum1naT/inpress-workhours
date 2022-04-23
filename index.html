@@ -18,53 +18,57 @@
             <h1>Zápis odpracovaných hodin</h1>
             <a target="_blank" href="https://docs.google.com/spreadsheets/d/1a6EElxcMa7kGsiWU8oYtK94IwWV8FHhq_rBHt9Zl2o8/edit?usp=sharing">Tady testovací excel</a>
 
-            <form target="_blank" action="https://hook.eu1.make.com/j93ll3zxaiqt5ws7nea5cxbzxesiomun" method="POST" id="form" class="row">
+            <form target="_blank" action="https://hook.eu1.make.com/j93ll3zxaiqt5ws7nea5cxbzxesiomun" method="POST" id="form" class="row" onsubmit="return validateForm()">
                 <div class="mb-3 col-12">
                     <label for="date" class="form-label">Datum</label>
-                    <input type="date" name="date" placeholder="" class="form-control" id="date" aria-describedby="emailHelp">
+                    <input type="date" name="date" placeholder="" class="form-control" id="date" aria-describedby="emailHelp" required>
                     <div id="dateHelp" class="form-text">Tady bude helptext, ahoj.</div>
                   </div>
                   <div class="mb-3 col-12 row">
                     <label for="start-date" class="form-label">Začátek</label>
                     <div class="col-md-4">
-                        <input type="date" name="start-date" placeholder="" class="form-control" id="start-date" aria-describedby="start-date">
+                        <input type="date" name="start-date" placeholder="" class="form-control" id="start-date" aria-describedby="start-date" onchange="calculateTimeSpent()" required>
 
                     </div>
                     <div class="col-md-4">
 
-                        <input type="time" name="start-hour" placeholder="" class="form-control" id="start-hour" aria-describedby="start-hour">
+                        <input type="time" name="start-time" placeholder="" class="form-control" id="start-time" aria-describedby="start-time" onchange="calculateTimeSpent()" required>
                 </div>
+                <div class="col-md-4">
+            </div>
 
                   </div>
 
                   <div class="mb-3 col-12 row">
                     <label for="end-date" class="form-label">Konec</label>
                     <div class="col-md-4">
-                        <input type="date" name="end-date" placeholder="" class="form-control" id="end-date" aria-describedby="end-date">
-
+                        <input type="date" name="end-date" placeholder="" class="form-control" id="end-date" aria-describedby="end-date" onchange="calculateTimeSpent()" required>
                     </div>
                     <div class="col-md-4">
 
-                        <input type="time" name="end-hour" placeholder="" class="form-control" id="end-hour" aria-describedby="end-hour">
+                        <input type="time" name="end-time" placeholder="" class="form-control" id="end-time" aria-describedby="end-time" onchange="calculateTimeSpent()" required>
                 </div>
 
-                  </div>
 
+                  </div>
+                  <div class="col-md-12">
+                    <div id="time-calculation"><p>Odpracováno: </p></div>
+            </div>
                   <div class="mb-3 col-12">
                     <label for="order-number" class="form-label">Číslo zakázky</label>
-                    <input type="text" name="order-number" placeholder="" class="form-control" id="order-number" aria-describedby="order-number">
+                    <input type="text" name="order-number" placeholder="" class="form-control" id="order-number" aria-describedby="order-number" required>
                     <div id="dateHelp" class="form-text">ve formátu ??-??????.</div>
                   </div>
                   <div class="mb-3 col-12">
                     <label for="worker" class="form-label">Pracovník</label>
-                    <input type="text" name="worker" class="form-control" id="worker" aria-describedby="worker" list="workers">
+                    <input type="text" name="worker" class="form-control" id="worker" aria-describedby="worker" list="workers" required>
                     <datalist id="workers">
 
                     </datalist>
                   </div>
                   <div class="mb-3 col-sm-6">
                     <label for="work-type" class="form-label">Operace</label>
-                    <input type="text" name="work-type" class="form-control" id="work-type" aria-describedby="work-type" list="operations">
+                    <input type="text" name="work-type" class="form-control" id="work-type" aria-describedby="work-type" list="operations" required>
                     <datalist id="operations">
 
                       </datalist>
@@ -72,14 +76,14 @@
                                   </div>
                   <div class="mb-3 col-sm-6">
                     <label for="work-machine" class="form-label">Stroj</label>
-                    <input type="text" name="work-machine" class="form-control" id="work-type" aria-describedby="work-machine" list="machines">
+                    <input type="text" name="work-machine" class="form-control" id="work-machine" aria-describedby="work-machine" list="machines" required>
                     <datalist id="machines">
 
                       </datalist>
                   </div>
                   <div class="mb-3 col-sm-3">
                     <label for="order-number" class="form-label">Počet kusů</label>
-                    <input type="number" name="worker-number" placeholder="" class="form-control" id="order-number" aria-describedby="emailHelp">
+                    <input type="number" name="worker-number" placeholder="" class="form-control" id="order-number" aria-describedby="emailHelp" required>
                   </div>
                   <div class="mb-3 col-sm-9">
                     <label for="order-number" class="form-label">Poznámka</label>
@@ -100,28 +104,45 @@
 
 
     $( document ).ready(function() {
+        // init
         $("#date").val(new Date().toDateInputValue())
         $("#start-date").val(new Date().toDateInputValue())
         $("#end-date").val(new Date().toDateInputValue())
-        console.log( "ready!" );
-        console.log( operations );
 
 
-
-          operations.forEach(element => {
-            console.log(element.value);
-            $("#operations").append(`<option value="${element.value}">`)
-
-          });
     });
 
-    var btn = document.getElementById('butt');
-    $('#form').submit(function (evt) {
-        evt.preventDefault();
-        var date_str = $("#date").val();
-        var date = Date.parse(date_str); // date in ms
-        alert(date);
-    });
+    function calculateTimeSpent(){
+        let start_date = $("#start-date").val();
+        let start_time = $("#start-time").val();
+
+        let end_date = $("#end-date").val();
+        let end_time = $("#end-time").val();
+        if (end_time === "" || start_time === ""){
+            console.log("no time");
+            return "";
+        }
+        if (end_date === "" || start_date === ""){
+            console.log("no date");
+            return "";
+        }
+        let start_mili = new Date(start_date + " " + start_time).getTime()
+        let end_mili = new Date(end_date + " " + end_time).getTime()
+        console.log(start_mili)
+        console.log(end_mili)
+        console.log(start_mili >= end_mili)
+        if(start_mili >= end_mili){
+            document.getElementById("time-calculation").innerHTML="<p> Datum musí být v budoucnosti </p>";
+            return "";
+        } else {
+            difference = msToTime(end_mili - start_mili);
+            console.log("diff: " + difference);
+            document.getElementById("time-calculation").innerHTML="<p>"+difference+"</p>";
+        }
+
+    }
+
+
     </script>
     
     
