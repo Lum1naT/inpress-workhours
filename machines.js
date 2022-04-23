@@ -1,0 +1,7 @@
+const machines = new Set()
+machines.add({"value": "stroj 1", 'text': "omega"})
+machines.add({"value": "stroj 2", 'text': "alpha"})
+machines.add({"value": "stroj 3", 'text': "beta"})
+machines.add({"value": "stroj 4", 'text': "gamma"})
+machines.add({"value": "stroj 5", 'text': "hahahah"})
+machines.add({"value": "stroj 6", 'text': "omagagsdgega"})
