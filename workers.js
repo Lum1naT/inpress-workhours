@@ -9,12 +9,12 @@ fetch(url)
     var json = JSON.parse(jsonString);
     var first = true;
     var result = ''
-    json.table.rows.forEach(ligne => {
+    json.table.rows.forEach(line => {
       var temp = ''
-      ligne.c.forEach(cellule => {
-          try{var valeur = cellule.f ? cellule.f : cellule.v}
-          catch(e){var valeur = ''}
-          temp += valeur + " "
+      line.c.forEach(cell => {
+          try{var value = cell.f ? cell.f : cell.v}
+          catch(e){var value = ''}
+          temp += value + " "
         }
       )
       temp = temp.trimEnd()

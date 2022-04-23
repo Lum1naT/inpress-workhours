@@ -73,9 +73,10 @@
                                   </div>
                   <div class="mb-3 col-sm-6">
                     <label for="work-machine" class="form-label">Stroj</label>
-                    <select class="form-select" id="work-machine" aria-label="Stroje">
+                    <input type="text" name="work-machine" class="form-control" id="work-type" aria-describedby="work-machine" list="machines">
+                    <datalist id="machines">
 
-                      </select>
+                      </datalist>
                   </div>
                   <div class="mb-3 col-sm-3">
                     <label for="order-number" class="form-label">Počet kusů</label>
@@ -89,15 +90,12 @@
               </form>
         </div>
       </div>
+      <script src="workers.js"></script>
       <script src="google_sheets.js"></script>
 
-      <script async defer src="https://apis.google.com/js/api.js"
-      onload="this.onload=function(){};handleClientLoad()"
-      onreadystatechange="if (this.readyState === 'complete') this.onload()">
-    </script>
+
 
       <script src="utilities.js"></script>
-      <script src="machines.js"></script>
       <script src="operations.js"></script>
       <script>
 
@@ -109,9 +107,6 @@
         console.log( "ready!" );
         console.log( operations );
 
-        machines.forEach(element => {
-             $("#work-machine").append(`<option value="${element.value}">${element.text}</option>`)
-          });
 
 
           operations.forEach(element => {
