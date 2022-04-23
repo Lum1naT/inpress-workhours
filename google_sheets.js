@@ -8,7 +8,6 @@ fetch(url)
   function myItems(jsonString){
     var json = JSON.parse(jsonString);
     var first = true;
-    var table = ''
     var result = ''
     json.table.rows.forEach(ligne => {
       var temp = ''
