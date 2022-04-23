@@ -54,6 +54,7 @@ function msToTime(s) {
         console.log("diff: " + difference);
         document.getElementById("time-calculation").innerHTML="<p>Odpracováno: <b>"+difference+"</b></p>";
         $("#time-spent").attr("value", difference);
+        return difference
     }
 }
 
@@ -111,6 +112,9 @@ $("#form").submit(function(e) {
         alert("Datum musí být vyplněno");
         return false;
     }
+
+    $("#time-spent").attr("value", calculateTimeSpent());
+
     
     $.ajax({
         type: "POST",
