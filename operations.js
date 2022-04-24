@@ -13,8 +13,10 @@ function myItems(jsonString) {
         var temp = ''
         line.c.forEach(cell => {
             try { var value = cell.f ? cell.f : cell.v } catch (e) { var value = '' }
-            temp += value + " "
-        })
+            if (value !== null || value !== "null"){
+              temp += value + " "
+
+            }        })
         temp = temp.trimEnd()
         result += `<option value="${temp}">`
 
