@@ -77,7 +77,7 @@ $("#form").submit(function(e) {
     e.preventDefault(); // avoid to execute the actual submit of the form.
 
     var form = $(this);
-    var actionUrl = "https://hook.eu1.make.com/j93ll3zxaiqt5ws7nea5cxbzxesiomun";
+    var actionUrl = "https://hook.eu1.make.com/b2n408y9o5ig3u7jeodx3i5p79ksrk25";
     let date = $("#date").val();
 
     let start_date = $("#start-date").val();
