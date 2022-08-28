@@ -22,7 +22,10 @@
 
             <form target="_blank" action="https://hook.eu1.make.com/b2n408y9o5ig3u7jeodx3i5p79ksrk25" method="POST" id="form" class="row">
                 <div class="mb-3 col-12 row">
-                    <label for="start-date" class="form-label">Začátek</label>
+                    <label for="start-date" class="form-label">Začátek
+                        <small class="text-muted">Початок</small>
+
+                    </label>
                     <div class="col-md-4">
                         <input type="date" name="start-date" placeholder="" class="form-control" id="start-date" aria-describedby="start-date" onchange="calculateTimeSpent()" required tabindex="1">
 
@@ -37,7 +40,10 @@
                 </div>
 
                 <div class="mb-3 col-12 row">
-                    <label for="end-date" class="form-label">Konec</label>
+                    <label for="end-date" class="form-label">Konec
+                        <small class="text-muted">Кінець</small>
+
+                    </label>
                     <div class="col-md-4">
                         <input type="date" name="end-date" placeholder="" class="form-control" id="end-date" aria-describedby="end-date" onchange="calculateTimeSpent()" required tabindex="2">
                     </div>
@@ -59,7 +65,10 @@
                     <input type="text" hidden name="time-spent" id="time-spent">
                 </div>
                 <div class="mb-3 col-sm-3">
-                    <label for="order-number" class="form-label">Číslo zakázky</label>
+                    <label for="order-number" class="form-label">Číslo zakázky
+                        <small class="text-muted">Номер замовлення</small>
+
+                    </label>
                     <input type="text" name="order-number" placeholder="" class="form-control" id="order-number" aria-describedby="order-number" required>
                 </div>
                 <div class="mb-3 col-sm-9">
