@@ -72,14 +72,21 @@
                     <input type="text" name="order-number" placeholder="" class="form-control" id="order-number" aria-describedby="order-number" required>
                 </div>
                 <div class="mb-3 col-sm-9">
-                    <label for="worker" class="form-label">Pracovník</label>
+                    <label for="worker" class="form-label">Pracovník
+                        <small class="text-muted">робітник</small>
+
+                        
+                    </label>
                     <input type="text" name="worker" class="form-control" id="worker" aria-describedby="worker" list="workers" required>
                     <datalist id="workers">
 
                     </datalist>
                 </div>
                 <div class="mb-3 col-sm-6">
-                    <label for="work-type" class="form-label">Operace</label>
+                    <label for="work-type" class="form-label">Operace
+                        <small class="text-muted">операція</small>
+
+                    </label>
                     <input type="text" name="work-type" class="form-control" id="work-type" aria-describedby="work-type" list="operations" required autocomplete="off">
                     <datalist id="operations">
 
@@ -87,18 +94,27 @@
 
                 </div>
                 <div class="mb-3 col-sm-6">
-                    <label for="work-machine" class="form-label">Stroj</label>
+                    <label for="work-machine" class="form-label">Stroj
+                        <small class="text-muted">машина</small>
+                        
+                    </label>
                     <input type="text" name="work-machine" class="form-control" id="work-machine" aria-describedby="work-machine" list="machines" required autocomplete="off">
                     <datalist id="machines">
 
                       </datalist>
                 </div>
                 <div class="mb-3 col-sm-3">
-                    <label for="work-quantity" class="form-label">Počet kusů</label>
+                    <label for="work-quantity" class="form-label">Počet kusů
+                        <small class="text-muted">Кількість</small>
+                        
+                    </label>
                     <input type="number" name="work-quantity" placeholder="" class="form-control" id="work-quantity" aria-describedby="work-quantity" required>
                 </div>
                 <div class="mb-3 col-sm-9">
-                    <label for="worker-note" class="form-label">Poznámka</label>
+                    <label for="worker-note" class="form-label">Poznámka
+                        <small class="text-muted">Примітка</small>
+
+                    </label>
                     <textarea class="form-control" id="worker-note" name="worker-note" rows="2"> </textarea>
 
                 </div>
