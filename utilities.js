@@ -41,12 +41,12 @@ function calculateTimeSpent() {
     console.log(end_mili)
     console.log(start_mili >= end_mili)
     if (start_mili >= end_mili) {
-        document.getElementById("time-calculation").innerHTML = "<p> Datum musí být v budoucnosti </p>";
+        document.getElementById("time-calculation").innerHTML = '<p> Datum musí být v budoucnosti <br> <small class="text-muted">Дата має бути в майбутньому</small></p>';
         return "";
     } else {
         difference = msToTime(end_mili - start_mili);
         console.log("diff: " + difference);
-        document.getElementById("time-calculation").innerHTML = "<p>Odpracováno: <b>" + difference + "</b></p>";
+        document.getElementById("time-calculation").innerHTML = 'Odpracováno <small class="text-muted">кількість відпрацьованих годин</small>    <b>' + difference + '</b></p>';
         $("#time-spent").attr("value", difference);
         return difference
     }
